@@ -87,7 +87,7 @@ void print_env_sorted(t_env *env_list)
         i++;
     }
     i = 0;
-    while (i < count)
+    while (i < count - 1)
     {
         if (arr[i]->value)
             printf("declare -x %s=\"%s\"\n", arr[i]->name, arr[i]->value);
