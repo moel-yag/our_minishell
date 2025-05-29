@@ -37,3 +37,20 @@ argv[4]: 3
 
 =================================
 rm: cannot remove 'my_notes': No such file or directory
+moel-yag@c3r4p4:~$ echo bonjour|;
+bash: syntax error near unexpected token `;'
+moel-yag@c3r4p4:~$ echo bonjour;ls
+bonjour
+ 42_EXAM   Documents   exam04   file2	  Music      Pictures   Templates  'VirtualBox VMs'
+ Desktop   Downloads   file     goinfre   PastPrjs   Public     Videos
+moel-yag@c3r4p4:~$ echo bonjour>test\1
+moel-yag@c3r4p4:~$ ld
+ld: no input files
+moel-yag@c3r4p4:~$ ls
+ 42_EXAM   Documents   exam04   file2	  Music      Pictures   Templates   Videos
+ Desktop   Downloads   file     goinfre   PastPrjs   Public     test1	   'VirtualBox VMs'
+moel-yag@c3r4p4:~$ cat test1 
+bonjour
+moel-yag@c3r4p4:~$ cat test\1 
+bonjour
+
