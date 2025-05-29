@@ -83,5 +83,8 @@ void handle_heredoc(char *command, char **env)
     close(stdin_backup);
     unlink(temp_file); // Remove the temporary file
     free(temp_file);
+    free(cmd);
+    free(delimiter);
+    free(temp_file);
     free_split(parts);
 }

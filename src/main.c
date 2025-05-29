@@ -2,8 +2,7 @@
 
 t_data g_data;
 
-/*
-void multi_to_single_space(char **av, char *res, int ac)
+/*void multi_to_single_space(char **av, char *res, int ac)
 {
   int(i), (j), (k);
 
@@ -28,8 +27,8 @@ void multi_to_single_space(char **av, char *res, int ac)
     i++;
   }
   res[k] = '\0';
-}
-*/
+}*/
+
 void handle_sigint(int sig)
 {
   (void)sig;

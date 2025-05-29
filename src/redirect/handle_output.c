@@ -32,5 +32,7 @@ void handle_output_redirection(char *command, char **env) {
 
     dup2(stdout_backup, STDOUT_FILENO);
     close(stdout_backup);
+    free(cmd);
+    free(file);
     free_split(parts);
 }

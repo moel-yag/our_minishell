@@ -12,8 +12,25 @@ t_command *create_command(char *cmd) {
         free(new_node);
         return (NULL);
     }
+    // while (tokens[i])
+    // {    
+        // if (ft_strlen(tokens[i]) == 0) {
+        //     free_split(tokens);
+        //     free(new_node->full_command);
+        //     free(new_node);
+        //     return NULL;
+        // }
+    printf("tokens[%d]: %s\n", i, tokens[i]);
+    //     i++;
+    // }
     int len = get_len(tokens);
     new_node->command = strdup(tokens[0]);
+    // if (!new_node->command) {
+    //     free(new_node->full_command);
+    //     free(new_node);
+    //     free_split(tokens);
+    //     return NULL;
+    // }
     new_node->arguments = NULL;
     if (len > 1)
     {
