@@ -1,4 +1,5 @@
 #include "../includes/minishell2.h"
+#include "../includes/minishell.h"
 
 t_token *create_token(char *value, t_token_type type) {
     t_token *new_token = malloc(sizeof(t_token));
