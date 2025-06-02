@@ -1,0 +1,39 @@
+
+<!-- 1 -->
+// need to be handled
+// env: too many arguments
+// This is the expected output when running the command `env | grep n` in a shell that has an `env` command that does not accept arguments.
+// The error message indicates that the `env` command was called with too many arguments,
+// which is consistent with the behavior of the `ft_env` function in the provided code snippet.
+//minishell> env | grep n
+//env: too many arguments
+
+<!-- 2 -->
+// This is the expected output when running the command `ls > file1 > file2` in a shell.
+// The command attempts to redirect the output of `ls` to two files, `file1` and `file2`.
+// However, the shell typically only allows one output redirection per command.
+//minishell> ls > file1 > file2
+//minishell> ls
+//builtins  file	file1  includes  libft	Makefile  medel_notes  minishell  src
+
+<!-- 3 -->
+//minishell> ls
+//Command: ls
+//=================================
+//builtins  file	includes  libft  Makefile  medel_notes	minishell  src
+//minishell> ls | cat medel_notes > my_notes | sleep 3
+//minishell> ls
+//Command: ls
+//=================================
+// builtins   file   includes   libft   Makefile	 medel_notes   minishell  'my_notes | sleep 3'	 src
+//minishell> rm my_notes | sleep 3 
+//Command: rm
+//Arguments: 
+//argv[0]: rm
+//argv[1]: my_notes
+//argv[2]: |
+//argv[3]: sleep
+//argv[4]: 3
+//
+//=================================
+//rm: cannot remove 'my_notes': No such file or directory
