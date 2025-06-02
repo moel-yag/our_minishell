@@ -7,6 +7,7 @@ void free_commands(t_command *head) {
     while (head) {
         temp = head;
         free(head->command);
+        free(head->full_command);
         free_split(head->arguments);
         head = temp->next;
         free(temp);

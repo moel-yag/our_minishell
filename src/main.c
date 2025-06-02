@@ -29,6 +29,13 @@ t_data g_data;
   res[k] = '\0';
 }*/
 
+void cleanup(void)
+{
+  free_env_list(g_data.env_list);
+  g_data.env_list = NULL;
+  g_data.exit_status = 0;
+}
+
 void handle_sigint(int sig)
 {
   (void)sig;
@@ -51,14 +58,12 @@ void print_argv(t_command *cmd)
 
   while (current)
   {
-    // printf("Command: %s\n", current->command);
+    printf("Command: %s\n", current->command);
     if (current->arguments)
     {
       printf("Arguments: \n");
       for (int i = 0; current->arguments[i]; i++)
-      {
         printf("argv[%d]: %s\n", i, current->arguments[i]);
-      }
       printf("\n");
     }
     current = current->next;
@@ -71,11 +76,11 @@ void free_env_list(t_env *env)
     t_env *tmp;
     while (env)
     {
-        tmp = env->next;
-        free(env->name);
-        free(env->value);
-        free(env);
-        env = tmp;
+      tmp = env->next;
+      free(env->name);
+      free(env->value);
+      free(env);
+      env = tmp;
     }
 }
 
@@ -95,7 +100,12 @@ int main(int ac, char **av, char **env)
   {
     input = readline("minishell> ");
     if (input == NULL) // Handle EOF (Ctrl+D)
+    {
+      printf("CTRL + D captured\n");
+      // free(input);
+      cleanup();
       break;
+    }
     if (*input == '\0') // Handle empty input
     {
       free(input);
@@ -118,7 +128,7 @@ int main(int ac, char **av, char **env)
     free_commands(cmd);   // Free the command structure
     free(input);
   }
-  free_env_list(g_data.env_list); // Free the environment list
+  // free_env_list(g_data.env_list); // Free the environment list
   // printf("exit\n");
   // Free any remaining resources
   // Note: You may want to implement a proper cleanup function

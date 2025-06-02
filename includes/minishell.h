@@ -120,4 +120,8 @@ int get_len(char **s);
 char *process_quotes(const char *input);
 bool has_unclosed_quotes(const char *input);
 
+// cleaup
+void free_env_list(t_env *env);
+void cleanup(void);
+
 #endif // MINISHELL_H

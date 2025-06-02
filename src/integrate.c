@@ -73,11 +73,11 @@ void shell_loop(t_command *cmd, char **env)
     }
 
     // Regular command execution (non-piped)
-    char **full_command = ft_split(cmd->full_command, ' ');
-    if (!full_command) {
-        perror("minishell");
-        return;
-    }
+    // char **full_command = ft_split(cmd->full_command, ' ');
+    // if (!full_command) {
+    //     perror("minishell");
+    //     return;
+    // }
 
     // pid_t pid = fork();
     // if (pid < 0) {

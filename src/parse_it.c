@@ -2,9 +2,13 @@
 
 t_command *parse_input(char *input, char **env)
 {
+    if (!input || !*input)
+    {
+        fprintf(stderr, "minishell: syntax error: empty input\n");
+        return NULL;
+    }
     t_command *cmd;
     char *processed_input;
-
     // First check for unclosed quotes
     if (has_unclosed_quotes(input))
     {

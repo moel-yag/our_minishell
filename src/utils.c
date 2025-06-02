@@ -101,5 +101,39 @@ t_env *env_from_array(char **env)
 		}
 		i++;
 	}
+	// while (new)
+	// {
+	// 	t_env *tmp = new;
+	// 	new = new->next;
+	// 	free(tmp->name);
+	// 	free(tmp->value);
+	// 	free(tmp);
+	// }
+	// if (head == NULL)
+	// {
+	// 	head = malloc(sizeof(t_env));
+		// head->name = NULL;
+		// head->value = NULL;
+		// head->next = NULL;
+	// }
+	// if (head && head->name && head->value && ft_strcmp(head->name, "PATH") == 0)
+	// {
+	// 	char *path = head->value;
+	// 	if (str_ichr(path, ':') == -1) // If no colon found, it's not a valid PATH
+	// 	{
+	// 		free(head->name);
+	// 		free(head->value);
+	// 		free(head);
+	// 		return NULL;
+	// 	}
+	// }
+	// else if (head && head->name && ft_strcmp(head->name, "PATH") != 0)
+	// {
+	// 	free(head->name);
+	// 	free(head->value);
+	// 	free(head);
+	// 	head = NULL;
+	// }
+
 	return head;
 }

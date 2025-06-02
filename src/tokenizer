@@ -1,0 +1,38 @@
+hello"world"'helo'| ls < << hello
+
+token {
+value : hello"world"'helo'
+type  : TOKEN_WORD 
+}
+
+
+token 
+{
+    value = NULL;
+    type : TOKEN_PIPE     
+}
+
+token {
+    value : ls
+    type  : TOKEN_WORD 
+}
+
+token {
+    value : NULL
+    type  : TOKEN_IN
+}
+
+token {
+    value : NULL
+    type : TOEKN HEREDOC 
+}
+
+token {
+    value : hello
+    type  : TOKEN_WORD
+}
+
+token {
+    value : NULL
+    type  : TOKEN_EOI 
+}
