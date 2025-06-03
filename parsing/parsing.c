@@ -82,7 +82,7 @@ bool ft_token_is_redirection(t_token_type type)
             || type == TOKEN_HEREDOC);
 }
 
-void    ft_lst_push(t_list **head, char *value)
+void    ft_lst_push(t_list **head, void *value)
 {
     t_list *new_node = ft_lstnew(value);
     if (!new_node)
@@ -124,8 +124,14 @@ t_ast *parser(const char *input)
         {
             if (current->next && current->next->type == TOKEN_WORD)
             {
-                char *redirection = current->next->value;
-                ft_lst_push(&curr->redirections, redirection);
+                // t_redir *redir = malloc(sizeof(t_redir));
+                // if (!redir)
+                //     return NULL; // Handle memory allocation failure
+                // redir->type = current->type; // Set the type of redirection
+                // Set the filename for the redirection
+                current->value = current->next->value; // Get the filename from the next token
+                // char *redirection = current->next->value;
+                ft_lst_push(&curr->redirections, current);
                 current = current->next; // Skip the next word as it's already processed
             }
             else

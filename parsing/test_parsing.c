@@ -24,13 +24,23 @@ void    print_ast(t_ast *ast)
         t_list *redir = ast->redirections;
         while (redir)
         {
-            printf("\t\t- %s\n", (char *)redir->content);
+            // printf("\t\t- %s\n", (char *)redir->content);
+            t_token *r = (t_token *)redir->content;
+            printf("\t\t- type: %s, filename: %s\n", ft_token_gettype(r->type), r->value);
             redir = redir->next;
         }
         printf("\n");
         ast = ast->next;
     }
 }
+
+// void free_ast(t_ast *ast)
+// {
+//     if (!ast)
+//         return;
+//     ft_lstclear(&ast->args, NULL);
+//     ft_lstclear(&ast->redirections, free); // free each t_redir*
+// }
 
 void    test_parsing(const char *input, const char *test_name)
 {
@@ -51,7 +61,7 @@ void    test_parsing(const char *input, const char *test_name)
         return;
     }
     print_ast(ast);
-    // free_ast(ast);
+    free_ast(ast);
     free_tokens(tokens);
     printf("================================================\n");
 }
@@ -97,6 +107,26 @@ int main(void)
     // Test 10: Empty input
     printf("=== 10 - Testing Empty Input ===\n");
     test_parsing("", "Empty input");
+
+    // Test 11: Unclosed quotes
+    printf("=== 11 - Testing Unclosed Quotes ===\n");
+    test_parsing("echo \"|\" Hello World", "Unclosed quotes");
+
+    // Test 12: Syntax error with pipe
+    printf("=== 12 - Testing Syntax Error with Pipe ===\n");
+    test_parsing("ls | | grep test", "Syntax error with pipe");
+    // Test 13: Syntax error with redirection
+    printf("=== 13 - Testing Syntax Error with Redirection ===\n");
+    test_parsing("ls > > output.txt", "Syntax error with redirection");
+    // Test 14: Syntax error with heredoc
+    printf("=== 14 - Testing Syntax Error with Heredoc ===\n");
+    test_parsing("cat << EOF Hello World", "Syntax error with heredoc");
+    // Test 15: Command with special characters
+    printf("=== 15 - Testing Command with Special Characters ===\n");
+    test_parsing("echo $HOME | grep 'test'", "Command with special characters");
+    // Test 16: Command with environment variable
+    printf("=== 16 - Testing Command with Environment Variable ===\n");
+    test_parsing("echo $PATH", "Command with environment variable");
 
     return 0;
 }
