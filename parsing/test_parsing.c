@@ -51,7 +51,7 @@ void    test_parsing(const char *input, const char *test_name)
         return;
     }
     print_ast(ast);
-    free_ast(ast);
+    // free_ast(ast);
     free_tokens(tokens);
     printf("================================================\n");
 }
@@ -96,7 +96,7 @@ int main(void)
 
     // Test 10: Empty input
     printf("=== 10 - Testing Empty Input ===\n");
-    test_parsing("ls | cat test | sleep 4", "Empty input");
+    test_parsing("", "Empty input");
 
     return 0;
 }

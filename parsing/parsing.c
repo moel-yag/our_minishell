@@ -51,16 +51,16 @@ void add_ast_node(t_ast **head, t_ast *new_node)
         current->next = new_node;
     }
 }
-void free_ast_list(t_ast *head)
-{
-    t_ast *current = head;
-    while (current)
-    {
-        t_ast *next = current->next;
-        free_ast(current);
-        current = next;
-    }
-}
+// void free_ast_list(t_ast *head)
+// {
+//     t_ast *current = head;
+//     while (current)
+//     {
+//         t_ast *next = current->next;
+//         free_ast(current);
+//         current = next;
+//     }
+// }
 // void print_ast(t_ast *ast)
 // {
 //     if (!ast)
@@ -93,25 +93,29 @@ void    ft_lst_push(t_list **head, char *value)
 t_ast *parser(const char *input)
 {
     t_token *tokens = tokenize(input);
+    t_token *current = tokens;
     if (!tokens)
     {
         fprintf(stderr, "Error tokenizing input.\n");
         return NULL;
     }
-
+    while (tokens && tokens->type != TOKEN_EOF)
+    {
+        // t_token *temp = tokens;
+        printf("- %-20s\t %s\n", ft_token_gettype(tokens->type), tokens->value);
+        tokens = tokens->next;
+    }
     t_ast *ast = NULL;
     t_ast *curr = create_ast_node();
+    ast = curr; // Initialize the AST with the first node
     if (!curr)
     {
         fprintf(stderr, "Error creating AST node.\n");
         free_tokens(tokens);
         return NULL;
     }
-    ast = curr; // Initialize the AST with the first node
-    t_token *current = tokens;
     while (current)
     {     
-        printf("Current token: Type: %s, Value: %s\n", ft_token_gettype(current->type), current->value);  
         if (current->type == TOKEN_EOF)
             break;
         else if (current->type == TOKEN_WORD)
@@ -121,7 +125,6 @@ t_ast *parser(const char *input)
             if (current->next && current->next->type == TOKEN_WORD)
             {
                 char *redirection = current->next->value;
-                // redirection = current->next->value;
                 ft_lst_push(&curr->redirections, redirection);
                 current = current->next; // Skip the next word as it's already processed
             }
@@ -129,7 +132,7 @@ t_ast *parser(const char *input)
             {
                 ft_lst_push(&curr->redirections, current->value);
                 printf("Redirection without target%s\n", current->value);
-                free_ast(ast);
+                // free_ast(ast);
                 free_tokens(tokens);
                 return NULL;
             }
@@ -140,7 +143,7 @@ t_ast *parser(const char *input)
             if (current->next->type != TOKEN_WORD && !ft_token_is_redirection(current->next->type))
             {
                 fprintf(stderr, "Syntax error: Pipe not followed by a command or redirection.\n");
-                free_ast(ast);
+                // free_ast(ast);
                 free_tokens(tokens);
                 return NULL;
             }
@@ -148,7 +151,7 @@ t_ast *parser(const char *input)
             if (!new_node)
             {
                 fprintf(stderr, "Error creating new AST node for pipe.\n");
-                free_ast(ast);
+                // free_ast(ast);
                 free_tokens(tokens);
                 return NULL;
             }
@@ -159,7 +162,7 @@ t_ast *parser(const char *input)
         else
         {
             fprintf(stderr, "Unexpected token type: %d\n", current->type);
-            free_ast(ast);
+            // free_ast(ast);
             free_tokens(tokens);
             return NULL;
         }

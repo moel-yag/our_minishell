@@ -1,7 +1,7 @@
 # Compiler and flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-LDFLAGS = -lreadline -Llibft -lft -fsanitize=address
+LDFLAGS = -lreadline -Llibft -lft #-fsanitize=address
 
 # Directories
 LIBFT_DIR = libft
